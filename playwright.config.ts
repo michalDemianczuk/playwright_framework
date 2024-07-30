@@ -9,8 +9,9 @@ export default defineConfig({
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 1 : undefined,
     reporter: 'html',
+    globalSetup: 'src/global-setup.ts',
     use: {
-        baseURL: 'http://localhost:3000',
+        baseURL: process.env.BASE_URL,
         actionTimeout: 0,
         trace: 'retain-on-failure',
         video: 'retain-on-failure',
