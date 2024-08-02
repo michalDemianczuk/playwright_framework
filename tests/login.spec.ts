@@ -8,12 +8,8 @@ test.describe('Verify login', () => {
     test('Login with correct credentials @GAD_R02_01', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const welcomePage = new WelcomePage(page);
-        const loginData: LoginData = {
-            userEmail: testUser1.userEmail,
-            userPassword: testUser1.userPassword,
-        };
         await loginPage.goto();
-        await loginPage.loginNew(loginData);
+        await loginPage.login(testUser1);
         const title = await welcomePage.title();
         expect(title).toContain('Welcome');
     });
@@ -22,10 +18,12 @@ test.describe('Verify login', () => {
         page,
     }) => {
         const loginPage = new LoginPage(page);
-        const email = testUser1.userEmail;
-        const password = 'incorrectPassword';
+        const loginData: LoginData = {
+            userEmail: testUser1.userEmail,
+            userPassword: 'incorrectPassword',
+        };
         await loginPage.goto();
-        await loginPage.login(email, password);
+        await loginPage.login(loginData);
         await expect
             .soft(loginPage.loginError)
             .toHaveText('Invalid username or password');
