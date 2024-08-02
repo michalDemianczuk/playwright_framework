@@ -1,3 +1,4 @@
+import { LoginData } from '../src/models/login.model';
 import { LoginPage } from '../src/pages/login.page';
 import { WelcomePage } from '../src/pages/welcome.page';
 import { testUser1 } from '../src/test-data/user.data';
@@ -7,10 +8,12 @@ test.describe('Verify login', () => {
     test('Login with correct credentials @GAD_R02_01', async ({ page }) => {
         const loginPage = new LoginPage(page);
         const welcomePage = new WelcomePage(page);
-        const email = testUser1.userEmail;
-        const password = testUser1.userPassword;
+        const loginData: LoginData = {
+            userEmail: testUser1.userEmail,
+            userPassword: testUser1.userPassword,
+        };
         await loginPage.goto();
-        await loginPage.login(email, password);
+        await loginPage.loginNew(loginData);
         const title = await welcomePage.title();
         expect(title).toContain('Welcome');
     });

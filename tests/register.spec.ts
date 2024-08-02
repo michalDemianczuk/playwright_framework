@@ -1,3 +1,4 @@
+import { RegisterUser } from '../src/models/user.model';
 import { LoginPage } from '../src/pages/login.page';
 import { RegisterPage } from '../src/pages/register.page';
 import { WelcomePage } from '../src/pages/welcome.page';
@@ -12,16 +13,19 @@ test.describe('Verify register', () => {
         const loginPage = new LoginPage(page);
         const welcomePage = new WelcomePage(page);
 
-        const name = faker.person.firstName();
-        const lastName = faker.person.lastName();
-        const email = faker.internet.email({
-            firstName: name,
-            lastName: lastName,
+        const registerUser: RegisterUser = {
+            userFirstName: faker.person.firstName().replace(/[^A-Za-z]/g, ''),
+            userLastName: faker.person.lastName().replace(/[^A-Za-z]/g, ''),
+            userEmail: '',
+            userPassword: faker.internet.password(),
+        };
+        registerUser.userEmail = faker.internet.email({
+            firstName: registerUser.userFirstName,
+            lastName: registerUser.userLastName,
         });
-        const password = faker.internet.password();
 
         await registerPage.goto();
-        await registerPage.register(name, lastName, email, password);
+        await registerPage.register(registerUser);
         await expect(registerPage.registerPopup).toBeVisible();
         await expect(registerPage.registerPopup).toHaveText('User created');
 
@@ -29,7 +33,10 @@ test.describe('Verify register', () => {
         const titleLoginPage = await loginPage.title();
         expect.soft(titleLoginPage).toContain('Login');
 
-        await loginPage.login(email, password);
+        await loginPage.login(
+            registerUser.userEmail,
+            registerUser.userPassword,
+        );
         const titleWelcomePage = await welcomePage.title();
         expect(titleWelcomePage).toContain('Welcome');
     });
