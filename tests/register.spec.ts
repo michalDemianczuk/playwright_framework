@@ -42,8 +42,8 @@ test.describe('Verify register', () => {
     });
 
     test('Not register with incorrect data - non valid email @GAD_R03_04', async ({
-                                                                        page,
-                                                                    }) => {
+        page,
+    }) => {
         const registerPage = new RegisterPage(page);
 
         const registerUser: RegisterUser = {
@@ -56,9 +56,9 @@ test.describe('Verify register', () => {
         await registerPage.goto();
         await registerPage.register(registerUser);
 
-        const expectedErrorMessage = "Please provide a valid email address"
-        await expect(registerPage.emailErrorText).toHaveText(expectedErrorMessage);
-
+        const expectedErrorMessage = 'Please provide a valid email address';
+        await expect(registerPage.emailErrorText).toHaveText(
+            expectedErrorMessage,
+        );
     });
-
 });

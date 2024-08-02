@@ -1,4 +1,4 @@
-import {LoginData} from "../models/login.model";
+import { LoginData } from '../models/login.model';
 
 export const testUser1: LoginData = {
     userEmail: process.env.USER_EMAIL,
