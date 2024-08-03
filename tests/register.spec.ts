@@ -1,8 +1,7 @@
-import { RegisterUser } from '../src/models/user.model';
+import { randomUser } from '../src/factories/user.factory';
 import { LoginPage } from '../src/pages/login.page';
 import { RegisterPage } from '../src/pages/register.page';
 import { WelcomePage } from '../src/pages/welcome.page';
-import { faker } from '@faker-js/faker';
 import { expect, test } from 'playwright/test';
 
 test.describe('Verify register', () => {
@@ -13,16 +12,7 @@ test.describe('Verify register', () => {
         const loginPage = new LoginPage(page);
         const welcomePage = new WelcomePage(page);
 
-        const registerUser: RegisterUser = {
-            userFirstName: faker.person.firstName().replace(/[^A-Za-z]/g, ''),
-            userLastName: faker.person.lastName().replace(/[^A-Za-z]/g, ''),
-            userEmail: '',
-            userPassword: faker.internet.password(),
-        };
-        registerUser.userEmail = faker.internet.email({
-            firstName: registerUser.userFirstName,
-            lastName: registerUser.userLastName,
-        });
+        const registerUser = randomUser();
 
         await registerPage.goto();
         await registerPage.register(registerUser);
@@ -46,12 +36,8 @@ test.describe('Verify register', () => {
     }) => {
         const registerPage = new RegisterPage(page);
 
-        const registerUser: RegisterUser = {
-            userFirstName: faker.person.firstName().replace(/[^A-Za-z]/g, ''),
-            userLastName: faker.person.lastName().replace(/[^A-Za-z]/g, ''),
-            userEmail: 'fegdfhgdfh@##$',
-            userPassword: faker.internet.password(),
-        };
+        const registerUser = randomUser();
+        registerUser.userEmail = 'sdjhfg!@^%$';
 
         await registerPage.goto();
         await registerPage.register(registerUser);
