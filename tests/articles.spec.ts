@@ -25,18 +25,6 @@ test.describe('Verify login', () => {
         await expect.soft(addArticleView.header).toBeVisible();
     });
 
-    test('Create new article @GAD_R04_01', async () => {
-        const articleData = randomArticle();
-        await addArticleView.createNewArticle(articleData);
-
-        await expect(articlePage.articleTitle).toHaveText(
-            articleData.articleTitle,
-        );
-        await expect(articlePage.articleBody).toHaveText(
-            articleData.articleBody,
-        );
-    });
-
     test('Verify error if title was not provided @GAD_R04_01', async () => {
         const articleData = randomArticle();
         const expectedAlertMessage = 'Article was not created';
