@@ -1,9 +1,14 @@
 import { ArticleData } from '../models/article.model';
 import { faker } from '@faker-js/faker';
 
-export function randomArticle(): ArticleData {
+export function randomArticle(titleLenght?: number): ArticleData {
+    let title: string;
+    if (titleLenght) title = faker.string.alpha(titleLenght);
+    else title = faker.lorem.sentence();
+    const body = faker.lorem.word();
+
     return {
-        articleTitle: faker.lorem.word(),
-        articleBody: faker.lorem.word(),
+        articleTitle: title,
+        articleBody: body,
     };
 }
