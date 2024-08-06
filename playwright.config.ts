@@ -1,5 +1,5 @@
+import { BASE_URL } from './src/env.config,ts';
 import { defineConfig, devices } from '@playwright/test';
-import {BASE_URL} from "./src/env.config,ts";
 
 export default defineConfig({
     testDir: './tests',
