@@ -8,7 +8,8 @@
         "prettier": "npx prettier --write .",
         "prepare": "husky",
         "test": "npx playwright test",
-        "test-ui": "npx playwright test --headed",
+        "test-headed": "npx playwright test --headed",
+        "test-ui": "npx playwright test --ui",
         "show-report": "npx playwright show-report",
         "codegen": "npx playwright codegen"
     },
