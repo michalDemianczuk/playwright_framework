@@ -1,4 +1,4 @@
-import { randomUser } from '../src/factories/user.factory';
+import { PrepareRandomUser } from '../src/factories/user.factory';
 import { RegisterDataModel } from '../src/models/user.model';
 import { LoginPage } from '../src/pages/login.page';
 import { RegisterPage } from '../src/pages/register.page';
@@ -15,7 +15,7 @@ test.describe('Verify register', () => {
         registerPage = new RegisterPage(page);
         loginPage = new LoginPage(page);
         welcomePage = new WelcomePage(page);
-        registerUser = randomUser();
+        registerUser = PrepareRandomUser();
     });
 
     test('Register with correct data and login @GAD_R03_01', async () => {
@@ -25,14 +25,14 @@ test.describe('Verify register', () => {
         await expect(registerPage.registerPopup).toHaveText('User created');
 
         await loginPage.waitForPageToLoadUrl();
-        const titleLoginPage = await loginPage.title();
+        const titleLoginPage = await loginPage.getTitle();
         expect.soft(titleLoginPage).toContain('Login');
 
         await loginPage.login({
             userEmail: registerUser.userEmail,
             userPassword: registerUser.userPassword,
         });
-        const titleWelcomePage = await welcomePage.title();
+        const titleWelcomePage = await welcomePage.getTitle();
         expect(titleWelcomePage).toContain('Welcome');
     });
 

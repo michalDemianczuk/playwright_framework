@@ -10,7 +10,7 @@ test.describe('Verify login', () => {
         const welcomePage = new WelcomePage(page);
         await loginPage.goto();
         await loginPage.login(testUser1);
-        const title = await welcomePage.title();
+        const title = await welcomePage.getTitle();
         expect(title).toContain('Welcome');
     });
 
@@ -27,7 +27,7 @@ test.describe('Verify login', () => {
         await expect
             .soft(loginPage.loginError)
             .toHaveText('Invalid username or password');
-        const title = await loginPage.title();
+        const title = await loginPage.getTitle();
         expect.soft(title).toContain('Login');
     });
 });

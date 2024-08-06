@@ -1,4 +1,4 @@
-import { randomArticle } from '../../src/factories/article.factory';
+import { prepareRandomArticle } from '../../src/factories/article.factory';
 import { ArticleDataModel } from '../../src/models/article.model';
 import { ArticlePage } from '../../src/pages/article.page';
 import { ArticlesPage } from '../../src/pages/articles.page';
@@ -27,7 +27,7 @@ test.describe('Create, verify and delete article', () => {
     });
 
     test('Create new article @GAD_R04_01', async () => {
-        articleData = randomArticle();
+        articleData = prepareRandomArticle();
 
         await articlesPage.addNewArticleButton.click();
         await expect.soft(addArticleView.header).toBeVisible();
@@ -61,7 +61,7 @@ test.describe('Create, verify and delete article', () => {
         await articlePage.deleteArticle();
 
         await articlesPage.waitForPageToLoadUrl();
-        const title = await articlesPage.title();
+        const title = await articlesPage.getTitle();
         expect(title).toContain('Articles');
 
         await articlesPage.searchArticle(articleData.articleTitle);

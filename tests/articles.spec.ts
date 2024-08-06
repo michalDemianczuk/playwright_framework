@@ -1,4 +1,4 @@
-import { randomArticle } from '../src/factories/article.factory';
+import { prepareRandomArticle } from '../src/factories/article.factory';
 import { ArticlePage } from '../src/pages/article.page';
 import { ArticlesPage } from '../src/pages/articles.page';
 import { LoginPage } from '../src/pages/login.page';
@@ -26,33 +26,33 @@ test.describe('Verify login', () => {
     });
 
     test('Verify error if title was not provided @GAD_R04_01', async () => {
-        const articleData = randomArticle();
+        const articleData = prepareRandomArticle();
         const expectedAlertMessage = 'Article was not created';
         articleData.articleTitle = '';
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alert).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
     });
 
     test('Verify error if body was not provided @GAD_R04_01', async () => {
-        const articleData = randomArticle();
+        const articleData = prepareRandomArticle();
         const expectedAlertMessage = 'Article was not created';
         articleData.articleBody = '';
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alert).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
     });
 
     test('Verify error if title was exceeding 128 sings @GAD_R04_01', async () => {
         const expectedAlertMessage = 'Article was not created';
-        const articleData = randomArticle(129);
+        const articleData = prepareRandomArticle(129);
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alert).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
     });
 
     test('Create article with title with 128 sings @GAD_R04_01', async () => {
-        const articleData = randomArticle(128);
+        const articleData = prepareRandomArticle(128);
 
         await addArticleView.createNewArticle(articleData);
 

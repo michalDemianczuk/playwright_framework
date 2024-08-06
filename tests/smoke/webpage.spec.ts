@@ -7,21 +7,21 @@ test.describe('Verify service main page', () => {
     test('Home page title @GAD-R01-01', async ({ page }) => {
         const homePage = new HomePage(page);
         await homePage.goto();
-        const title = await homePage.title();
+        const title = await homePage.getTitle();
         expect(title).toContain('GAD');
     });
 
     test('Articles page title @GAD-R01-02', async ({ page }) => {
         const articlesPage = new ArticlesPage(page);
         await articlesPage.goto();
-        const title = await articlesPage.title();
+        const title = await articlesPage.getTitle();
         expect(title).toContain('Articles');
     });
 
     test('Comments page title @GAD-R01-02', async ({ page }) => {
         const commentsPage = new CommentsPage(page);
         await commentsPage.goto();
-        const title = await commentsPage.title();
+        const title = await commentsPage.getTitle();
         expect(title).toContain('Comments');
     });
 });
