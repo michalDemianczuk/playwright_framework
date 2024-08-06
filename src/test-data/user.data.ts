@@ -1,6 +1,7 @@
 import { LoginDataModel } from '../models/login.model';
+import {USER_EMAIL, USER_PASSWORD} from "../env.config,ts";
 
 export const testUser1: LoginDataModel = {
-    userEmail: process.env.USER_EMAIL,
-    userPassword: process.env.USER_PASSWORD,
+    userEmail: USER_EMAIL,
+    userPassword: USER_PASSWORD,
 };

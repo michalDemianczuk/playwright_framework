@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import {BASE_URL} from "./src/env.config,ts";
 
 export default defineConfig({
     testDir: './tests',
@@ -11,7 +12,7 @@ export default defineConfig({
     reporter: 'html',
     globalSetup: 'src/global-setup.ts',
     use: {
-        baseURL: process.env.BASE_URL,
+        baseURL: BASE_URL,
         actionTimeout: 0,
         trace: 'retain-on-failure',
         video: 'retain-on-failure',

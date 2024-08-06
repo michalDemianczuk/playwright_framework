@@ -31,7 +31,9 @@ test.describe('Verify login', () => {
         articleData.articleTitle = '';
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(
+            expectedAlertMessage,
+        );
     });
 
     test('Verify error if body was not provided @GAD_R04_01', async () => {
@@ -40,7 +42,9 @@ test.describe('Verify login', () => {
         articleData.articleBody = '';
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(
+            expectedAlertMessage,
+        );
     });
 
     test('Verify error if title was exceeding 128 sings @GAD_R04_01', async () => {
@@ -48,7 +52,9 @@ test.describe('Verify login', () => {
         const articleData = prepareRandomArticle(129);
 
         await addArticleView.createNewArticle(articleData);
-        await expect(addArticleView.alertPopup).toHaveText(expectedAlertMessage);
+        await expect(addArticleView.alertPopup).toHaveText(
+            expectedAlertMessage,
+        );
     });
 
     test('Create article with title with 128 sings @GAD_R04_01', async () => {
