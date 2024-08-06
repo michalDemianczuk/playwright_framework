@@ -1,4 +1,4 @@
-import { LoginData } from '../src/models/login.model';
+import { LoginDataModel } from '../src/models/login.model';
 import { LoginPage } from '../src/pages/login.page';
 import { WelcomePage } from '../src/pages/welcome.page';
 import { testUser1 } from '../src/test-data/user.data';
@@ -18,7 +18,7 @@ test.describe('Verify login', () => {
         page,
     }) => {
         const loginPage = new LoginPage(page);
-        const loginData: LoginData = {
+        const loginData: LoginDataModel = {
             userEmail: testUser1.userEmail,
             userPassword: 'incorrectPassword',
         };

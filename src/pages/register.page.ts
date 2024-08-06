@@ -1,4 +1,4 @@
-import { RegisterUser } from '../models/user.model';
+import { RegisterDataModel } from '../models/user.model';
 import { BasePage } from './base.page';
 import { Page } from 'playwright';
 
@@ -15,7 +15,7 @@ export class RegisterPage extends BasePage {
         super(page);
     }
 
-    async register(userData: RegisterUser): Promise<void> {
+    async register(userData: RegisterDataModel): Promise<void> {
         await this.nameInput.fill(userData.userFirstName);
         await this.lastNameInput.fill(userData.userLastName);
         await this.emailInput.fill(userData.userEmail);

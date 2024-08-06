@@ -1,5 +1,5 @@
 import { randomUser } from '../src/factories/user.factory';
-import { RegisterUser } from '../src/models/user.model';
+import { RegisterDataModel } from '../src/models/user.model';
 import { LoginPage } from '../src/pages/login.page';
 import { RegisterPage } from '../src/pages/register.page';
 import { WelcomePage } from '../src/pages/welcome.page';
@@ -9,7 +9,7 @@ test.describe('Verify register', () => {
     let registerPage: RegisterPage;
     let loginPage: LoginPage;
     let welcomePage: WelcomePage;
-    let registerUser: RegisterUser;
+    let registerUser: RegisterDataModel;
 
     test.beforeEach(async ({ page }) => {
         registerPage = new RegisterPage(page);
