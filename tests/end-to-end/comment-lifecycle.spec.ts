@@ -100,4 +100,38 @@ test.describe('Create, verify and delete comment', () => {
             );
         });
     });
+
+    test('User can add more than one comment to article', async () => {
+        await test.step('Create new comment ', async () => {
+            //Arrange
+            const comment = prepareRandomComment(4);
+            const expectedCommentCreatedPopup = 'Comment was created';
+            //Act
+            await articlePage.addCommentButton.click();
+            await addCommentView.addComment(comment);
+            //Assert
+            await expect
+                .soft(articlePage.alertPopup)
+                .toHaveText(expectedCommentCreatedPopup);
+        });
+
+        await test.step('Create and verify another comment ', async () => {
+            const secondCommendBody =
+                await test.step('Create comment ', async () => {
+                    const secondCommend = prepareRandomComment(3);
+                    await articlePage.addCommentButton.click();
+                    await addCommentView.addComment(secondCommend);
+                    return secondCommend.commentBody;
+                });
+            await test.step('Verify comment ', async () => {
+                const articleComment =
+                    articlePage.getArticleComment(secondCommendBody);
+                await expect(articleComment.body).toHaveText(secondCommendBody);
+                await articleComment.link.click();
+                await expect(commentPage.commentBody).toHaveText(
+                    secondCommendBody,
+                );
+            });
+        });
+    });
 });
